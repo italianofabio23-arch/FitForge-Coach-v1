@@ -31,6 +31,52 @@ class _NutritionScreenState extends State<NutritionScreen> {
       consumed = 0;
     });
   }
+  Future<void> _addManualCalories() async {
+  final controller = TextEditingController();
+
+  final value = await showDialog<int>(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: const Text('Inserisci calorie'),
+        content: TextField(
+          controller: controller,
+          autofocus: true,
+          keyboardType: TextInputType.number,
+          decoration: const InputDecoration(
+            labelText: 'kcal',
+            hintText: 'Es. 375',
+            prefixIcon: Icon(Icons.local_fire_department),
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('ANNULLA'),
+          ),
+          FilledButton(
+            onPressed: () {
+              final kcal = int.tryParse(controller.text.trim());
+
+              if (kcal == null || kcal <= 0) {
+                return;
+              }
+
+              Navigator.pop(context, kcal);
+            },
+            child: const Text('AGGIUNGI'),
+          ),
+        ],
+      );
+    },
+  );
+
+  controller.dispose();
+
+  if (value != null) {
+    _add(value);
+  }
+  }
 
   IconData _mealIcon(String title) {
     final value = title.toLowerCase();
@@ -365,7 +411,14 @@ class _NutritionScreenState extends State<NutritionScreen> {
                     label: const Text('+500 kcal'),
                     onPressed: () => _add(500),
                   ),
-
+ActionChip(
+  avatar: const Icon(
+    Icons.edit,
+    size: 17,
+  ),
+  label: const Text('Inserisci kcal'),
+  onPressed: _addManualCalories,
+),
                   ActionChip(
                     avatar: const Icon(
                       Icons.restart_alt,

@@ -9,9 +9,22 @@ import 'theme.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
-  final saved = prefs.getString('fitforge_profile');
-  final profile = saved == null ? null : FitnessProfile.fromJsonString(saved);
-  runApp(FitForgeApp(initialProfile: profile));
+final saved = prefs.getString('fitforge_profile');
+
+FitnessProfile? profile;
+
+if (saved != null) {
+  profile = FitnessProfile.fromJsonString(saved);
+
+  if (!saved.contains('"planStartDate"')) {
+    await prefs.setString(
+      'fitforge_profile',
+      profile.toJsonString(),
+    );
+  }
+}
+
+runApp(FitForgeApp(initialProfile: profile));
 }
 
 class FitForgeApp extends StatefulWidget {

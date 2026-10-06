@@ -386,7 +386,21 @@ class DashboardScreen extends StatelessWidget {
               Text(
                 '• Omega-3: valuta prima quanto pesce è già presente nella dieta.',
               ),
+SizedBox(height: 6),
 
+Text(
+  '• L-carnitina: può avere un ruolo nel metabolismo energetico, ma non sostituisce deficit calorico, dieta e allenamento.',
+),
+SizedBox(height: 6),
+
+Text(
+  '• Glutammina: può essere usata come supporto nutrizionale; se l’apporto proteico è già adeguato non è indispensabile per aumentare la massa muscolare.',
+),
+SizedBox(height: 6),
+
+Text(
+  '• Magnesio: contribuisce alla normale funzione muscolare e nervosa; può essere utile soprattutto in caso di apporto insufficiente e nel supporto al rilassamento.',
+),
               SizedBox(height: 12),
 
               Text(

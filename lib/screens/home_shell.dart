@@ -25,11 +25,20 @@ class _HomeShellState extends State<HomeShell> {
   Widget build(BuildContext context) {
     final calories = CalorieService.build(widget.profile);
     final workouts = PlanGenerator.workouts(widget.profile);
+    final weekInBlock = PlanGenerator.weekInBlock(widget.profile);
+final trainingBlock = PlanGenerator.trainingBlock(widget.profile);
+    final daysUntilNextBlock =
+    PlanGenerator.daysUntilNextBlock(widget.profile);
     final nutrition = PlanGenerator.nutrition(calories.targetCalories);
 
     final pages = [
       DashboardScreen(profile: widget.profile, calories: calories, homeWorkout: PlanGenerator.homeWorkout()),
-      WorkoutScreen(workouts: workouts),
+      WorkoutScreen(
+  workouts: workouts,
+  weekInBlock: weekInBlock,
+  trainingBlock: trainingBlock,
+        daysUntilNextBlock: daysUntilNextBlock,
+),
       NutritionScreen(calories: calories, nutrition: nutrition),
       RecipesScreen(nutrition: nutrition),
       ProgressScreen(profile: widget.profile, onResetProfile: widget.onResetProfile),

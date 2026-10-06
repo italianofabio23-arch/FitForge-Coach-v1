@@ -2,8 +2,34 @@ import '../models/fitness_profile.dart';
 import '../models/plan_models.dart';
 
 class PlanGenerator {
+  static int trainingBlock(FitnessProfile p) {
+  final elapsedDays =
+      DateTime.now().difference(p.planStartDate).inDays;
+
+  final safeDays = elapsedDays < 0 ? 0 : elapsedDays;
+
+  return safeDays ~/ 28;
+}
+
+static int weekInBlock(FitnessProfile p) {
+  final elapsedDays =
+      DateTime.now().difference(p.planStartDate).inDays;
+
+  final safeDays = elapsedDays < 0 ? 0 : elapsedDays;
+
+  return ((safeDays % 28) ~/ 7) + 1;
+}
+  static int daysUntilNextBlock(FitnessProfile p) {
+  final elapsedDays =
+      DateTime.now().difference(p.planStartDate).inDays;
+
+  final safeDays = elapsedDays < 0 ? 0 : elapsedDays;
+  final dayInBlock = safeDays % 28;
+
+  return 28 - dayInBlock;
+  }
   static List<WorkoutDay> workouts(FitnessProfile p) {
-    final days = <WorkoutDay>[
+    final daysA = <WorkoutDay>[
       const WorkoutDay('Giorno 1', 'Push • Petto, spalle, tricipiti', [
         ExerciseItem('Panca piana', '4 × 6-10', 120),
         ExerciseItem('Spinte manubri inclinata', '3 × 8-12', 90),
@@ -40,7 +66,45 @@ class PlanGenerator {
         ExerciseItem('Crunch cavo', '3 × 12-15', 45),
       ]),
     ];
+final daysB = <WorkoutDay>[
+  const WorkoutDay('Giorno 1', 'Push B • Petto, spalle, tricipiti', [
+    ExerciseItem('Panca inclinata manubri', '4 × 8-10', 120),
+    ExerciseItem('Chest press', '3 × 10-12', 90),
+    ExerciseItem('Military press manubri', '3 × 8-10', 90),
+    ExerciseItem('Alzate laterali ai cavi', '3 × 12-15', 60),
+    ExerciseItem('French press cavo', '3 × 10-12', 60),
+  ]),
+  const WorkoutDay('Giorno 2', 'Pull B • Schiena, bicipiti', [
+    ExerciseItem('Trazioni / lat presa stretta', '4 × 6-10', 120),
+    ExerciseItem('Rematore manubrio', '4 × 8-10', 90),
+    ExerciseItem('Pulley presa larga', '3 × 10-12', 75),
+    ExerciseItem('Curl bilanciere EZ', '3 × 8-12', 60),
+    ExerciseItem('Curl inclinato manubri', '2 × 12-15', 60),
+  ]),
+  const WorkoutDay('Giorno 3', 'Lower B • Gambe e glutei', [
+    ExerciseItem('Hack squat', '4 × 8-10', 150),
+    ExerciseItem('Stacco rumeno manubri', '3 × 8-10', 120),
+    ExerciseItem('Pressa piedi stretti', '3 × 10-15', 90),
+    ExerciseItem('Leg curl seduto', '3 × 10-15', 75),
+    ExerciseItem('Calf pressa', '4 × 12-20', 60),
+  ]),
+  const WorkoutDay('Giorno 4', 'Upper B • Richiamo completo', [
+    ExerciseItem('Panca inclinata', '3 × 8-10', 90),
+    ExerciseItem('Lat machine presa larga', '3 × 8-12', 90),
+    ExerciseItem('Shoulder press macchina', '3 × 10-12', 90),
+    ExerciseItem('Row machine', '3 × 10-12', 75),
+    ExerciseItem('Superset curl + pushdown', '3 × 12+12', 60),
+  ]),
+  const WorkoutDay('Giorno 5', 'Lower B + Core • Gambe, glutei, addome', [
+    ExerciseItem('Hip thrust macchina', '4 × 8-10', 120),
+    ExerciseItem('Bulgarian split squat', '3 × 10 per lato', 90),
+    ExerciseItem('Leg extension singola', '3 × 12-15', 60),
+    ExerciseItem('Plank laterale', '3 × 40 sec per lato', 45),
+    ExerciseItem('Crunch inverso', '3 × 15-20', 45),
+  ]),
+];
 
+final days = trainingBlock(p).isEven ? daysA : daysB;
     if (p.trainingDays <= 3) {
       return [days[0], days[2], days[3]];
     }

@@ -48,6 +48,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       jobActivity: _job,
       goal: _goal,
       trainingDays: _trainingDays,
+      planStartDate: DateTime.now(),
     ));
   }
 

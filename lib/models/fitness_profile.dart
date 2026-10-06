@@ -16,6 +16,7 @@ class FitnessProfile {
     required this.jobActivity,
     required this.goal,
     required this.trainingDays,
+    required this.planStartDate,
   });
 
   final String name;
@@ -26,6 +27,7 @@ class FitnessProfile {
   final JobActivity jobActivity;
   final Goal goal;
   final int trainingDays;
+  final DateTime planStartDate;
 
   Map<String, dynamic> toJson() => {
         'name': name,
@@ -36,6 +38,7 @@ class FitnessProfile {
         'jobActivity': jobActivity.name,
         'goal': goal.name,
         'trainingDays': trainingDays,
+    'planStartDate': planStartDate.toIso8601String(),
       };
 
   String toJsonString() => jsonEncode(toJson());
@@ -51,6 +54,10 @@ class FitnessProfile {
       jobActivity: JobActivity.values.byName(map['jobActivity'] as String),
       goal: Goal.values.byName(map['goal'] as String),
       trainingDays: map['trainingDays'] as int,
+      planStartDate: DateTime.tryParse(
+      map['planStartDate'] as String? ?? '',
+    ) ??
+    DateTime.now(),
     );
   }
 }

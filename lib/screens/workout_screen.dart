@@ -5,11 +5,17 @@ import '../widgets/forge_card.dart';
 
 class WorkoutScreen extends StatelessWidget {
   const WorkoutScreen({
-    super.key,
-    required this.workouts,
-  });
+  super.key,
+  required this.workouts,
+  this.weekInBlock = 1,
+  this.trainingBlock = 0,
+    this.daysUntilNextBlock = 28,
+});
 
   final List<WorkoutDay> workouts;
+  final int weekInBlock;
+final int trainingBlock;
+  final int daysUntilNextBlock;
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +68,39 @@ class WorkoutScreen extends StatelessWidget {
         ),
 
         const SizedBox(height: 20),
+ForgeCard(
+  child: Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(
+        'SETTIMANA $weekInBlock / 4',
+        style: const TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.w900,
+        ),
+      ),
+      const SizedBox(height: 8),
+      Text(
+        'SCHEDA ${trainingBlock.isEven ? 'A' : 'B'}',
+        style: const TextStyle(
+          color: Color(0xFFFF4A2A),
+          fontSize: 16,
+          fontWeight: FontWeight.w900,
+        ),
+      ),
+      const SizedBox(height: 8),
+      Text(
+        'Cambio scheda tra $daysUntilNextBlock giorni',
+        style: const TextStyle(
+          color: Colors.white70,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+    ],
+  ),
+),
 
+const SizedBox(height: 20),
         ...workouts.asMap().entries.map(
           (entry) {
             final index = entry.key;
