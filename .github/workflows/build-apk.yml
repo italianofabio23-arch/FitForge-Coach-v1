@@ -1,0 +1,42 @@
+name: Build FitForge APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Scarica progetto
+        uses: actions/checkout@v4
+
+      - name: Installa Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Installa Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Crea struttura Android
+        run: flutter create --platforms=android --project-name fitforge_coach .
+
+      - name: Installa dipendenze
+        run: flutter pub get
+
+      - name: Crea APK Release
+        run: flutter build apk --release
+
+      - name: Salva APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: FitForge-Coach-APK
+          path: build/app/outputs/flutter-apk/app-release.apk
