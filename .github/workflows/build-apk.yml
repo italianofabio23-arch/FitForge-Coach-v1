@@ -53,6 +53,9 @@ jobs:
       - name: Installa dipendenze
         run: flutter pub get
 
+      - name: Genera icona FitForge
+        run: dart run flutter_launcher_icons
+
       - name: Crea APK Release
         run: flutter build apk --release
 
