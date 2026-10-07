@@ -1,53 +1,121 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="it">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>FitForge Coach</title>
+  <title>Apri FitForge Coach</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background:
+        radial-gradient(circle at top, rgba(255,90,60,0.18), transparent 35%),
+        linear-gradient(180deg, #0f0f12 0%, #16161c 100%);
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 24px;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 420px;
+      padding: 28px 22px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+      backdrop-filter: blur(8px);
+    }
+
+    .logo {
+      width: 140px;
+      max-width: 100%;
+      display: block;
+      margin: 0 auto 18px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: 38px;
+      line-height: 1.1;
+      font-weight: 800;
+    }
+
+    p {
+      margin: 0 0 20px;
+      font-size: 20px;
+      color: #e8e8e8;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      max-width: 320px;
+      margin: 14px auto;
+      padding: 16px 18px;
+      border-radius: 14px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 18px;
+      transition: transform 0.15s ease;
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn-open {
+      background: #ff5a3c;
+      color: white;
+    }
+
+    .btn-download {
+      background: white;
+      color: #111;
+    }
+
+    .small {
+      margin-top: 12px;
+      font-size: 14px;
+      color: #bdbdbd;
+    }
+  </style>
 </head>
+<body>
+  <div class="card">
+    <img src="fitforge-logo.png" alt="Logo FitForge Coach" class="logo">
 
-<body style="
-  background:#111;
-  color:white;
-  text-align:center;
-  font-family:Arial;
-  padding:70px 20px;
-">
+    <h1>FitForge Coach</h1>
+    <p>Apri o scarica l'app</p>
 
-<h1>FitForge Coach</h1>
+    <a class="btn btn-open" href="fitforge://open">
+      Apri FitForge Coach
+    </a>
 
-<p>Se hai già FitForge Coach installata:</p>
+    <a class="btn btn-download" href="FitForge-Coach.apk" download>
+      Scarica FitForge Coach
+    </a>
 
-<a href="fitforge://open"
-   style="
-   display:block;
-   max-width:320px;
-   margin:20px auto;
-   padding:16px;
-   background:#ff4a2a;
-   color:white;
-   text-decoration:none;
-   border-radius:12px;
-   font-weight:bold;">
-  Apri FitForge Coach
-</a>
+    <div class="small">
+      Se l'app è già installata, premi “Apri FitForge Coach”.
+    </div>
+  </div>
 
-<p>Se non hai ancora l'app:</p>
-
-<a href="FitForge-Coach.apk"
-   download
-   style="
-   display:block;
-   max-width:320px;
-   margin:20px auto;
-   padding:16px;
-   background:#ffffff;
-   color:#111;
-   text-decoration:none;
-   border-radius:12px;
-   font-weight:bold;">
-  Scarica FitForge Coach
-</a>
-
+  <script>
+    setTimeout(function () {
+      window.location.href = "fitforge://open";
+    }, 400);
+  </script>
 </body>
 </html>
